@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="Person">
+
+    <resultMap id="result" type="Person">
+        <result property="id" column="Roll_No"/>
+        <result property="name" column="Name"/>   
+    </resultMap>
+ 
+    <select id="selectAll" resultMap="result">
+        SELECT * FROM firsttable;
+    </select>
+    
+ 	<select id="selectById" parameterType="int" resultMap="result">
+        SELECT * FROM firsttable WHERE Roll_No = #{id}
+    </select>
+    
+ 	<insert id="insert" parameterType="Person" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO firsttable (Roll_No, Name, Subject, Marks) VALUES (#{id}, #{name}, 'abcd', 52);
+    </insert>
+    
+    <update id="update" parameterType="Person">
+        UPDATE firsttable
+        SET Name = #{name}
+        WHERE Roll_No = #{id} 
+  	</update>
+ 
+	<delete id="delete" parameterType="int">
+        DELETE from firsttable WHERE Roll_No = #{id}
+    </delete>
+</mapper>
